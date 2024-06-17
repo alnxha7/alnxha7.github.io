@@ -629,6 +629,10 @@ pre code {
   padding-left: 15px;
 }
 
+.col-md-4 {
+  padding-top: 50px
+}
+
 .col {
   -webkit-flex-basis: 0;
       -ms-flex-preferred-size: 0;
@@ -11186,15 +11190,20 @@ p {
   visibility: visible;
 }
 
-/*/ portfolio wrapper */
 .portfolio-card {
   display: block;
   position: relative;
   overflow: hidden;
+  width: 349px;
+  height: 349px;
 }
 
 .portfolio-card .portfolio-card-img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
+  align-items: center;
+  justify-content: center;
 }
 
 .portfolio-card .portfolio-card-overlay {
