@@ -1,256 +1,771 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Start your development with Meyawo landing page.">
-    <meta name="author" content="Devcrud">
-    <title>Portfolio-Alansha M</title>
-    <!-- font icons -->
-    <link rel="stylesheet" href="public_html/assets/vendors/themify-icons/css/themify-icons.css">
-    <!-- Bootstrap + Meyawo main styles -->
-    <link rel="stylesheet" href="public_html/assets/css/meyawo.css">
-    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function() {
-            emailjs.init('DiuEnl7OmJ83_oTUg'); // Replace 'your_public_key_here' with your actual public key from EmailJS
-
-            const form = document.getElementById('contact-form');
-            
-            form.addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent the default form submission
-
-                const name = form.querySelector('input[name="user_name"]').value;
-                const email = form.querySelector('input[name="user_email"]').value;
-                const comment = document.getElementById('comment').value;
-
-                const templateParams = {
-                    from_name: name,
-                    from_email: email,
-                    message: comment,
-                    to_email: 'alansha71011@gmail.com' // Your email address
-                };
-
-                emailjs.send('service_bfsewu8', 'template_f7q1nz4', templateParams)
-                    .then(function(response) {
-                        console.log('SUCCESS!', response.status, response.text);
-                        alert('Message sent successfully!');
-                        form.reset(); // Clear the form after successful submission
-                    }, function(error) {
-                        console.log('FAILED...', error);
-                        alert('Message failed to send.');
-                    });
-            });
-        });
-    </script>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Alansha M — Backend Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#05050a;--bg2:#0d0d16;--bg3:#12121e;--surface:#1a1a2e;
+  --border:#ffffff0f;--border2:#ffffff18;
+  --purple:#7c6ee0;--purple2:#a897f5;--purple3:#4a3fa0;
+  --green:#39d98a;--cyan:#38bdf8;--amber:#f59e0b;--red:#f87171;
+  --text:#f0f0f8;--text2:#9898b8;--text3:#5a5a7a;
+  --font-display:'Syne',sans-serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.7;overflow-x:hidden;cursor:none}
+.cursor{position:fixed;width:10px;height:10px;background:var(--purple2);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:screen}
+.cursor-ring{position:fixed;width:36px;height:36px;border:1px solid var(--purple);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .15s ease;mix-blend-mode:screen}
+.cursor-ring.hovered{transform:translate(-50%,-50%) scale(1.8);border-color:var(--purple2);opacity:.5}
+.grid-bg{position:fixed;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;z-index:0;pointer-events:none}
+.orb{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0}
+.orb1{width:600px;height:600px;background:rgba(124,110,224,.08);top:-200px;left:-200px}
+.orb2{width:400px;height:400px;background:rgba(56,189,248,.05);bottom:-100px;right:-100px}
+.orb3{width:300px;height:300px;background:rgba(57,217,138,.04);top:50%;left:60%}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:64px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid transparent;transition:all .4s}
+nav.scrolled{background:rgba(5,5,10,.9);backdrop-filter:blur(20px);border-bottom-color:var(--border)}
+.nav-logo{font-family:var(--font-display);font-size:20px;font-weight:800;color:var(--text);text-decoration:none;letter-spacing:-.5px}
+.nav-logo span{color:var(--purple2)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:13px;font-family:var(--font-mono);transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--purple2);transition:width .3s}
+.nav-links a:hover{color:var(--purple2)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{background:var(--purple);color:#fff;padding:8px 20px;border-radius:6px;font-size:13px;font-family:var(--font-mono);text-decoration:none;transition:all .2s;border:1px solid transparent}
+.nav-cta:hover{background:transparent;border-color:var(--purple);color:var(--purple2)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.hamburger span{width:24px;height:1.5px;background:var(--text2);display:block}
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(5,5,10,.97);backdrop-filter:blur(20px);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:40px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:var(--font-display);font-size:32px;font-weight:700;color:var(--text);text-decoration:none;transition:color .2s}
+.mobile-menu a:hover{color:var(--purple2)}
+.mobile-close{position:absolute;top:20px;right:20px;font-size:28px;color:var(--text2);cursor:pointer;background:none;border:none}
+#hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:100px 40px 60px;z-index:1}
+.hero-inner{max-width:1100px;margin:0 auto;width:100%}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border2);border-radius:100px;padding:6px 16px;font-family:var(--font-mono);font-size:12px;color:var(--green);margin-bottom:32px;animation:fadeUp .8s ease both}
+.hero-tag::before{content:'';width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+.hero-name{font-family:var(--font-display);font-size:clamp(52px,8vw,96px);font-weight:800;line-height:1;letter-spacing:-3px;margin-bottom:8px;animation:fadeUp .8s .1s ease both}
+.hero-name .outline{-webkit-text-stroke:1px var(--purple);color:transparent}
+.hero-name .solid{color:var(--text)}
+.hero-role{font-family:var(--font-mono);font-size:clamp(14px,2vw,18px);color:var(--purple2);margin-bottom:24px;animation:fadeUp .8s .2s ease both}
+.blink{animation:blink 1s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.hero-desc{font-size:16px;color:var(--text2);max-width:500px;margin-bottom:48px;line-height:1.8;animation:fadeUp .8s .3s ease both}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap;animation:fadeUp .8s .4s ease both}
+.btn-primary{background:var(--purple);color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-family:var(--font-mono);font-size:13px;font-weight:500;transition:all .3s;border:1px solid var(--purple);display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{background:var(--purple3);transform:translateY(-2px);box-shadow:0 16px 40px rgba(124,110,224,.3)}
+.btn-secondary{background:transparent;color:var(--text);padding:14px 32px;border-radius:8px;text-decoration:none;font-family:var(--font-mono);font-size:13px;border:1px solid var(--border2);transition:all .3s;display:inline-flex;align-items:center;gap:8px}
+.btn-secondary:hover{border-color:var(--purple);color:var(--purple2);transform:translateY(-2px)}
+.hero-stats{position:absolute;right:40px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:24px;animation:fadeLeft .8s .5s ease both}
+.stat-card{background:var(--surface);border:1px solid var(--border2);border-radius:12px;padding:20px 24px;text-align:center;min-width:120px}
+.stat-num{font-family:var(--font-display);font-size:32px;font-weight:800;color:var(--purple2);line-height:1}
+.stat-label{font-size:11px;color:var(--text3);font-family:var(--font-mono);margin-top:4px}
+.hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;animation:fadeUp .8s .6s ease both}
+.hero-scroll span{font-family:var(--font-mono);font-size:11px;color:var(--text3)}
+.scroll-line{width:1px;height:60px;background:linear-gradient(var(--purple),transparent);animation:scrollAnim 2s infinite}
+@keyframes scrollAnim{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}50.001%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeLeft{from{opacity:0;transform:translate(30px,-50%)}to{opacity:1;transform:translate(0,-50%)}}
+section{position:relative;z-index:1;padding:100px 40px}
+.section-inner{max-width:1100px;margin:0 auto;width:100%}
+.section-label{font-family:var(--font-mono);font-size:12px;color:var(--purple2);letter-spacing:.15em;margin-bottom:12px;text-transform:uppercase}
+.section-title{font-family:var(--font-display);font-size:clamp(32px,5vw,52px);font-weight:800;line-height:1.1;letter-spacing:-1.5px;margin-bottom:16px}
+.section-title span{color:var(--purple2)}
+.section-sub{color:var(--text2);max-width:520px;font-size:15px;line-height:1.8}
+.section-divider{width:100%;height:1px;background:var(--border);margin:0}
+#about{background:var(--bg)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:60px}
+.about-text p{color:var(--text2);line-height:1.9;margin-bottom:16px}
+.about-text p strong{color:var(--text)}
+.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:32px}
+.skill-pill{background:var(--surface);border:1px solid var(--border2);border-radius:8px;padding:10px 16px;font-family:var(--font-mono);font-size:12px;color:var(--text2);display:flex;align-items:center;gap:8px;transition:all .2s}
+.skill-pill:hover{border-color:var(--purple);color:var(--purple2);transform:translateX(4px)}
+.dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.dot-purple{background:var(--purple2)}.dot-green{background:var(--green)}.dot-cyan{background:var(--cyan)}.dot-amber{background:var(--amber)}
+.about-right{display:flex;flex-direction:column;gap:20px}
+.exp-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:28px;transition:all .3s;position:relative;overflow:hidden}
+.exp-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--purple),var(--cyan));transform:scaleX(0);transform-origin:left;transition:transform .4s}
+.exp-card:hover{border-color:var(--border2);transform:translateY(-4px)}
+.exp-card:hover::before{transform:scaleX(1)}
+.exp-year{font-family:var(--font-mono);font-size:11px;color:var(--purple2);margin-bottom:8px}
+.exp-role{font-family:var(--font-display);font-size:18px;font-weight:700;margin-bottom:4px}
+.exp-company{font-size:13px;color:var(--text2)}
+.exp-desc{font-size:13px;color:var(--text3);margin-top:10px;line-height:1.7}
+#projects{background:var(--bg2)}
+.projects-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;flex-wrap:wrap;gap:24px}
+.filter-tabs{display:flex;gap:8px;flex-wrap:wrap}
+.filter-tab{background:transparent;border:1px solid var(--border2);color:var(--text2);padding:8px 18px;border-radius:100px;font-family:var(--font-mono);font-size:12px;cursor:pointer;transition:all .2s}
+.filter-tab:hover,.filter-tab.active{background:var(--purple);border-color:var(--purple);color:#fff}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px}
+.project-card{background:var(--bg3);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all .3s;display:flex;flex-direction:column}
+.project-card:hover{border-color:var(--border2);transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,0,0,.4)}
+.project-card.hidden{display:none}
+.project-thumb{height:180px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.project-thumb svg{position:absolute;inset:0;width:100%;height:100%;opacity:.4}
+.thumb-icon{font-size:40px;z-index:1;position:relative}
+.project-badges{position:absolute;top:12px;left:12px;display:flex;gap:6px;z-index:2;flex-wrap:wrap}
+.badge{font-family:var(--font-mono);font-size:10px;padding:4px 10px;border-radius:100px;font-weight:500}
+.badge-live{background:rgba(57,217,138,.15);color:var(--green);border:1px solid rgba(57,217,138,.3)}
+.badge-personal{background:rgba(124,110,224,.15);color:var(--purple2);border:1px solid rgba(124,110,224,.3)}
+.badge-team{background:rgba(56,189,248,.15);color:var(--cyan);border:1px solid rgba(56,189,248,.3)}
+.badge-org{background:rgba(245,158,11,.15);color:var(--amber);border:1px solid rgba(245,158,11,.3)}
+.badge-wip{background:rgba(248,113,113,.15);color:var(--red);border:1px solid rgba(248,113,113,.3)}
+.project-body{padding:24px;flex:1;display:flex;flex-direction:column}
+.project-title{font-family:var(--font-display);font-size:20px;font-weight:700;margin-bottom:8px}
+.project-desc{font-size:14px;color:var(--text2);line-height:1.7;flex:1;margin-bottom:16px}
+.project-stack{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
+.stack-tag{background:var(--surface);color:var(--text3);font-family:var(--font-mono);font-size:11px;padding:4px 10px;border-radius:4px}
+.project-links{display:flex;gap:10px;margin-top:auto}
+.proj-btn{flex:1;padding:10px;border-radius:8px;font-family:var(--font-mono);font-size:12px;text-decoration:none;text-align:center;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px}
+.proj-btn-primary{background:var(--purple);color:#fff;border:1px solid var(--purple)}
+.proj-btn-primary:hover{background:var(--purple3)}
+.proj-btn-secondary{background:transparent;color:var(--text2);border:1px solid var(--border2)}
+.proj-btn-secondary:hover{border-color:var(--purple);color:var(--purple2)}
+.proj-btn-disabled{background:var(--surface);color:var(--text3);border:1px solid var(--border);opacity:.6;cursor:default}
+#education{background:var(--bg)}
+.edu-cert-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:60px}
+.edu-block-title{font-family:var(--font-mono);font-size:12px;color:var(--purple2);letter-spacing:.12em;text-transform:uppercase;margin-bottom:24px;display:flex;align-items:center;gap:10px}
+.edu-block-title::after{content:'';flex:1;height:1px;background:var(--border2)}
+.edu-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:28px;position:relative;overflow:hidden;transition:all .3s;margin-bottom:16px}
+.edu-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--purple),var(--cyan));border-radius:3px 0 0 3px}
+.edu-card:hover{border-color:var(--border2);transform:translateX(6px)}
+.edu-degree{font-family:var(--font-display);font-size:17px;font-weight:700;margin-bottom:4px}
+.edu-school{font-size:13px;color:var(--purple2);margin-bottom:6px;font-family:var(--font-mono)}
+.edu-year{font-family:var(--font-mono);font-size:11px;color:var(--text3);margin-bottom:10px}
+.edu-desc{font-size:13px;color:var(--text2);line-height:1.7}
+.cert-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:20px;display:flex;align-items:flex-start;gap:16px;transition:all .3s;margin-bottom:12px}
+.cert-card:hover{border-color:var(--purple);transform:translateX(6px);box-shadow:0 8px 32px rgba(124,110,224,.1)}
+.cert-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.ci-aws{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2)}
+.ci-py{background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.2)}
+.ci-dj{background:rgba(57,217,138,.1);border:1px solid rgba(57,217,138,.2)}
+.ci-gen{background:rgba(124,110,224,.1);border:1px solid rgba(124,110,224,.2)}
+.cert-name{font-family:var(--font-display);font-size:15px;font-weight:700;margin-bottom:3px;line-height:1.3}
+.cert-issuer{font-family:var(--font-mono);font-size:11px;color:var(--text3);margin-bottom:8px}
+.cert-badges{display:flex;gap:8px;flex-wrap:wrap}
+.cert-badge{font-family:var(--font-mono);font-size:10px;padding:3px 10px;border-radius:100px}
+.cb-year{background:var(--surface);color:var(--text3);border:1px solid var(--border2)}
+.cb-verify{background:rgba(57,217,138,.1);color:var(--green);border:1px solid rgba(57,217,138,.3);text-decoration:none;transition:all .2s}
+.cb-verify:hover{background:rgba(57,217,138,.2)}
+.sbar-label{display:flex;justify-content:space-between;margin-bottom:6px;font-family:var(--font-mono);font-size:12px;color:var(--text2)}
+.sbar-track{height:4px;background:var(--surface);border-radius:2px;margin-bottom:14px}
+.sbar-fill{height:100%;border-radius:2px}
+#github{background:var(--bg2)}
+.github-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:60px;align-items:start;margin-top:60px}
+.github-card{background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:32px;text-align:center}
+.github-avatar{width:80px;height:80px;border-radius:50%;background:var(--surface);border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:36px}
+.github-username{font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:4px}
+.github-bio{font-size:13px;color:var(--text2);margin-bottom:24px}
+.github-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.gh-stat{background:var(--surface);border-radius:10px;padding:14px 8px;text-align:center}
+.gh-stat-num{font-family:var(--font-display);font-size:22px;font-weight:800;color:var(--purple2)}
+.gh-stat-label{font-family:var(--font-mono);font-size:10px;color:var(--text3);margin-top:2px}
+.contrib-graph{background:var(--surface);border-radius:12px;padding:20px;margin-bottom:16px}
+.contrib-title{font-family:var(--font-mono);font-size:11px;color:var(--text3);margin-bottom:12px}
+.contrib-grid{display:grid;grid-template-columns:repeat(26,1fr);gap:3px}
+.contrib-cell{aspect-ratio:1;border-radius:2px;background:var(--border)}
+.contrib-cell.l1{background:#1e3a2f}.contrib-cell.l2{background:#2ea043}.contrib-cell.l3{background:#39d98a}.contrib-cell.l4{background:#a0f0c0}
+.github-right{display:flex;flex-direction:column;gap:16px}
+.repo-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:20px;transition:all .2s;text-decoration:none;color:inherit;display:block}
+.repo-card:hover{border-color:var(--border2);transform:translateX(4px)}
+.repo-name{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--purple2);margin-bottom:6px}
+.repo-desc{font-size:13px;color:var(--text2);margin-bottom:12px;line-height:1.6}
+.repo-meta{display:flex;gap:16px;font-family:var(--font-mono);font-size:11px;color:var(--text3);align-items:center}
+.lang-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:4px}
+#contact{background:var(--bg2)}
+.contact-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:60px;margin-top:60px;align-items:start}
+.contact-info{display:flex;flex-direction:column;gap:14px}
+.contact-item{display:flex;align-items:flex-start;gap:16px;padding:18px;background:var(--bg3);border:1px solid var(--border);border-radius:12px;transition:all .2s}
+.contact-item:hover{border-color:var(--border2)}
+.contact-icon{width:40px;height:40px;background:var(--surface);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.contact-item-title{font-family:var(--font-mono);font-size:10px;color:var(--text3);margin-bottom:3px;letter-spacing:.08em}
+.contact-item-val{font-size:14px;color:var(--text);font-weight:500}
+.contact-item-val a{color:var(--purple2);text-decoration:none}
+.contact-form{background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:36px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-group{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+.form-group label{font-family:var(--font-mono);font-size:11px;color:var(--text3);letter-spacing:.05em}
+.form-group input,.form-group textarea,.form-group select{background:var(--surface);border:1px solid var(--border2);border-radius:8px;padding:12px 16px;color:var(--text);font-family:var(--font-body);font-size:14px;outline:none;transition:all .2s;resize:none;width:100%}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,110,224,.1)}
+.form-group textarea{min-height:120px}
+.form-group select option{background:var(--bg2);color:var(--text)}
+.form-submit{width:100%;background:var(--purple);color:#fff;padding:14px;border:none;border-radius:8px;font-family:var(--font-mono);font-size:14px;font-weight:500;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:8px}
+.form-submit:hover{background:var(--purple3);transform:translateY(-2px);box-shadow:0 12px 32px rgba(124,110,224,.3)}
+.form-note{font-family:var(--font-mono);font-size:11px;color:var(--text3);text-align:center;margin-top:12px}
+.form-success{display:none;background:rgba(57,217,138,.1);border:1px solid rgba(57,217,138,.3);border-radius:12px;padding:20px;text-align:center;color:var(--green);font-family:var(--font-mono);font-size:13px;margin-bottom:16px}
+.form-success.show{display:block}
+footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 40px;z-index:1;position:relative}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px}
+.footer-logo{font-family:var(--font-display);font-size:20px;font-weight:800}
+.footer-logo span{color:var(--purple2)}
+.footer-links{display:flex;gap:24px}
+.footer-links a{color:var(--text3);text-decoration:none;font-family:var(--font-mono);font-size:12px;transition:color .2s}
+.footer-links a:hover{color:var(--purple2)}
+.footer-copy{font-family:var(--font-mono);font-size:11px;color:var(--text3)}
+.social-row{display:flex;gap:12px}
+.social-btn{width:38px;height:38px;background:var(--surface);border:1px solid var(--border2);border-radius:8px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(--text2);font-size:12px;font-family:var(--font-mono);font-weight:700;transition:all .2s}
+.social-btn:hover{border-color:var(--purple);color:var(--purple2);transform:translateY(-2px)}
+.reveal{opacity:0;transform:translateY(30px);transition:all .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--purple3);border-radius:2px}
+@media(max-width:900px){
+  .hero-stats{position:static;transform:none;flex-direction:row;margin-top:40px;animation:fadeUp .8s .5s ease both}
+  .about-grid,.edu-cert-grid,.github-grid,.contact-grid{grid-template-columns:1fr}
+  .projects-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+  section{padding:80px 24px}
+  nav{padding:0 24px}
+  #hero{padding:100px 24px 60px}
+  .hero-scroll{display:none}
+}
+</style>
 </head>
-<body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
-    <!-- Page Navbar -->
-    <nav class="custom-navbar" data-spy="affix" data-offset-top="20">
-        <div class="container">
-            <a class="logo" href="#">Portfolio</a>         
-            <ul class="nav">
-                <li class="item">
-                    <a class="link" href="#home">Home</a>
-                </li>
-                <li class="item">
-                    <a class="link" href="#about">About</a>
-                </li>
-                <li class="item">
-                    <a class="link" href="#projects">Projects</a>
-                </li>
-                <li class="item">
-                    <a class="link" href="#HireMe">HireMe</a>
-                </li>
-                <li class="item">
-                    <a class="link" href="#contact">Contact</a>
-                </li>
-            </ul>
-            <a href="javascript:void(0)" id="nav-toggle" class="hamburger hamburger--elastic">
-                <div class="hamburger-box">
-                  <div class="hamburger-inner"></div>
-                </div>
-            </a>
-        </div>          
-    </nav><!-- End of Page Navbar -->
-
-    <!-- page header -->
-    <header id="home" class="header">
-        <div class="overlay"></div>
-        <div class="header-content container">
-            <h1 class="header-title">
-                <span class="up">HI!</span>
-                <span class="down">I am Alansha</span>
-            </h1>
-            <p class="header-subtitle">Entry Level Data Scientist</p>            
-            <button id="github-btn" class="btn btn-primary">Visit My Repos</button>
-        </div>              
-    </header><!-- end of page header -->
-
-    <!-- about section -->
-    <section class="section pt-0" id="about">
-        <!-- container -->
-        <div class="container text-center">
-            <!-- about wrapper -->
-            <div class="about">
-                <div class="about-img-holder">
-                    <img src="public_html/assets/imgs/man1.png" class="about-img" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
-                </div>
-                <div class="about-caption">
-                    <p class="section-subtitle">Who Am I ?</p>
-                    <h2 class="section-title mb-3">About Me</h2>
-                    <p>As a budding Data Scientist currently immersed in an internship, I am dedicated to leveraging my educational background in Computer Science to deliver tangible results in real-world projects. 
-                        <br>Throughout this internships, I've actively contributed to diverse projects, applying my skills in machine learning, artificial intelligence, and data science to drive impactful outcomes. <br> 
-                        <br>The projects have not only allowed me to apply theoretical concepts in a practical setting but have also equipped me with valuable experience in project management and teamwork.
-                        <br>I am committed to continuing my growth as a Data Scientist, driven by the desire to deliver measurable impact through data-driven solutions.            
-                    </p>
-                    <button class="btn-rounded btn btn-outline-primary mt-4" id="cv-download-btn">Download CV</button>
-                </div>              
-            </div><!-- end of about wrapper -->
-        </div><!-- end of container -->
-    </section> <!-- end of about section -->
-
-    <!-- projects section -->
-    <section class="section" id="projects">
-        <div class="container text-center">
-            <p class="section-subtitle">What I Did ?</p>
-            <h6 class="section-title mb-6">Projects</h6>
-            <!-- row -->
-            <div class="row">
-                <div class="col-md-4">
-                    <a href="https://github.com/alnxha7/Diabetes_prediction_using_pytorch_ANN" class="portfolio-card">
-                        <img src="public_html/assets/imgs/diabetes.jpg" class="portfolio-card-img">    
-                        <span class="portfolio-card-overlay">
-                            <span class="portfolio-card-caption">
-                                <h4>Diabetes Prediction with Pytorch</h5>
-                                <p class="font-weight-normal">ANN (Deep Learning)</p>
-                            </span>                         
-                        </span>                     
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a href="https://github.com/alnxha7/House_price_prediction_using_PyTorch" class="portfolio-card">
-                        <img class="portfolio-card-img" src="public_html/assets/imgs/houseprice.jpg" class="img-responsive rounded" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
-                        <span class="portfolio-card-overlay">
-                            <span class="portfolio-card-caption">
-                                <h4>House Price Prediction with Pytorch</h5>
-                                <p class="font-weight-normal">Deep Learning</p>
-                            </span>                         
-                        </span>                         
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a href="https://github.com/alnxha7/edubook_modified.git" class="portfolio-card">
-                        <img class="portfolio-card-img" src="public_html/assets/imgs/edu.jpg" class="img-responsive rounded" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
-                        <span class="portfolio-card-overlay">
-                            <span class="portfolio-card-caption">
-                                <h4>EduBook</h5>
-                                <p class="font-weight-normal">Python - Django</p>
-                            </span>                         
-                        </span>                         
-                    </a>
-                </div>
-            </div><!-- end of row -->
-            <div class="row">
-                <div class="col-md-4">
-                    <a href="https://github.com/alnxha7/credit_card_default.git" class="portfolio-card">
-                        <img src="public_html/assets/imgs/creditcard.jpg" class="portfolio-card-img" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">    
-                        <span class="portfolio-card-overlay">
-                            <span class="portfolio-card-caption">
-                                <h4>Credit Card Defaulter Prediction</h5>
-                                <p class="font-weight-normal">Machine Learning</p>
-                            </span>                         
-                        </span>                     
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a href="https://github.com/alnxha7/Sentiment_Analysis_using_NLP" class="portfolio-card">
-                        <img class="portfolio-card-img" src="public_html/assets/imgs/NLP.jpg" class="img-responsive rounded" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">    
-                        <span class="portfolio-card-overlay">
-                            <span class="portfolio-card-caption">
-                                <h4>Sentiment Analysis</h5>
-                                <p class="font-weight-normal">NLP</p>
-                            </span>                         
-                        </span>                     
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a href="https://github.com/alnxha7/Pepper-disease-Classification_using_Tensorflow" class="portfolio-card">
-                        <img class="portfolio-card-img" src="public_html/assets/imgs/pepper.jpg" class="img-responsive rounded" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
-                        <span class="portfolio-card-overlay">
-                            <span class="portfolio-card-caption">
-                                <h4>Pepper Disease Classification with Tensorflow</h5>
-                                <p class="font-weight-normal">Deep Learning</p>
-                            </span>                         
-                        </span>                         
-                    </a>
-                </div>  
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="grid-bg"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+ 
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">AM<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#education">education</a></li>
+    <li><a href="#github">github</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">hire_me()</a>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+ 
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">&#x2715;</button>
+  <a href="#about" onclick="closeMobile()">about</a>
+  <a href="#projects" onclick="closeMobile()">projects</a>
+  <a href="#education" onclick="closeMobile()">education</a>
+  <a href="#github" onclick="closeMobile()">github</a>
+  <a href="#contact" onclick="closeMobile()">contact</a>
+</div>
+ 
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Available for opportunities</div>
+    <div class="hero-name">
+      <div class="solid">Alansha</div>
+      <div class="outline">M.</div>
+    </div>
+    <div class="hero-role"><span id="typewriter"></span><span class="blink">|</span></div>
+    <p class="hero-desc">Building scalable backend systems and deploying them to the cloud. I turn complex problems into clean, production-ready code.</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">&#9889; View My Work</a>
+      <a href="#contact" class="btn-secondary">&#9993; Let's Talk</a>
+      <a href="https://github.com/alansha" target="_blank" class="btn-secondary">&#60;/&#62; GitHub</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card"><div class="stat-num">5+</div><div class="stat-label">Projects</div></div>
+      <div class="stat-card"><div class="stat-num">3+</div><div class="stat-label">Years Exp</div></div>
+      <div class="stat-card"><div class="stat-num">AWS</div><div class="stat-label">Cloud</div></div>
+    </div>
+    <div class="hero-scroll"><span>scroll</span><div class="scroll-line"></div></div>
+  </div>
+</section>
+ 
+<div class="section-divider"></div>
+ 
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label reveal">// who am i</div>
+    <h2 class="section-title reveal">Building the <span>Backend</span><br/>that Powers the Web</h2>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>Hey, I'm <strong>Alansha M</strong> — a backend developer from Kerala, India, passionate about building things that live on the internet. I specialise in <strong>Python ecosystems</strong> including Django, Flask, and FastAPI.</p>
+        <p>I love the full deployment journey — from writing the first line of code to watching it run live on an <strong>AWS EC2 instance</strong> behind Nginx and Gunicorn. DevOps isn't just a skill for me — it's how I prove my work is real.</p>
+        <p>When I'm not coding, I'm learning about distributed systems, cloud architecture, or building side projects that push my limits.</p>
+        <div class="skills-grid">
+          <div class="skill-pill"><span class="dot dot-purple"></span>Python</div>
+          <div class="skill-pill"><span class="dot dot-purple"></span>Django</div>
+          <div class="skill-pill"><span class="dot dot-green"></span>Flask</div>
+          <div class="skill-pill"><span class="dot dot-green"></span>FastAPI</div>
+          <div class="skill-pill"><span class="dot dot-cyan"></span>AWS EC2 / S3</div>
+          <div class="skill-pill"><span class="dot dot-cyan"></span>CodeDeploy</div>
+          <div class="skill-pill"><span class="dot dot-amber"></span>MySQL</div>
+          <div class="skill-pill"><span class="dot dot-amber"></span>REST APIs</div>
+          <div class="skill-pill"><span class="dot dot-purple"></span>Gunicorn</div>
+          <div class="skill-pill"><span class="dot dot-green"></span>Nginx</div>
+          <div class="skill-pill"><span class="dot dot-cyan"></span>Docker</div>
+          <div class="skill-pill"><span class="dot dot-amber"></span>Git / GitHub</div>
+        </div>
+      </div>
+      <div class="about-right reveal">
+        <div class="exp-card">
+          <div class="exp-year">2025 — Present</div>
+          <div class="exp-role">Full Stack Developer</div>
+          <div class="exp-company">DAVIGAME Platform &middot; Personal Project</div>
+          <div class="exp-desc">Built and deployed a full gaming platform with token economy, Stripe payments, and AWS CI/CD pipeline from scratch.</div>
+        </div>
+        <div class="exp-card">
+          <div class="exp-year">2024 — 2025</div>
+          <div class="exp-role">Backend Developer</div>
+          <div class="exp-company">Organisation Projects &middot; Team Work</div>
+          <div class="exp-desc">Worked on team-based projects building REST APIs and backend systems with Django and MySQL.</div>
+        </div>
+        <div class="exp-card">
+          <div class="exp-year">2023 — 2024</div>
+          <div class="exp-role">Python Developer</div>
+          <div class="exp-company">Freelance &middot; Solo</div>
+          <div class="exp-desc">Developed and delivered Python Django web applications for clients, focusing on clean architecture and performance.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<div class="section-divider"></div>
+ 
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="projects-header">
+      <div>
+        <div class="section-label reveal">// what i've built</div>
+        <h2 class="section-title reveal">Featured <span>Projects</span></h2>
+      </div>
+      <div class="filter-tabs reveal">
+        <button class="filter-tab active" onclick="filterProjects(this,'all')">All</button>
+        <button class="filter-tab" onclick="filterProjects(this,'personal')">Personal</button>
+        <button class="filter-tab" onclick="filterProjects(this,'team')">Team / Org</button>
+        <button class="filter-tab" onclick="filterProjects(this,'live')">Live</button>
+      </div>
+    </div>
+    <div class="projects-grid">
+ 
+      <div class="project-card reveal" data-type="personal live">
+        <div class="project-thumb" style="background:linear-gradient(135deg,#1a0a2e,#2d1b69)">
+          <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><circle cx="200" cy="100" r="80" fill="none" stroke="#7c6ee0" stroke-width="0.5" opacity="0.6"/><circle cx="200" cy="100" r="130" fill="none" stroke="#7c6ee0" stroke-width="0.5" opacity="0.3"/><circle cx="200" cy="100" r="50" fill="#7c6ee044"/></svg>
+          <div class="thumb-icon">&#127918;</div>
+          <div class="project-badges"><span class="badge badge-live">&#9679; Live</span><span class="badge badge-personal">Personal</span></div>
+        </div>
+        <div class="project-body">
+          <div class="project-title">DAVIGAME Platform</div>
+          <div class="project-desc">A full-stack gaming platform with a custom Davitoken economy. Players earn tokens by playing games and convert them to real INR through a Stripe-powered wallet system.</div>
+          <div class="project-stack"><span class="stack-tag">Django</span><span class="stack-tag">MySQL</span><span class="stack-tag">Stripe</span><span class="stack-tag">AWS EC2</span><span class="stack-tag">Nginx</span><span class="stack-tag">CodeDeploy</span></div>
+          <div class="project-links">
+            <a href="http://18.215.155.128/" target="_blank" class="proj-btn proj-btn-primary">&#127760; Live Demo</a>
+            <a href="https://github.com/alansha" target="_blank" class="proj-btn proj-btn-secondary">&#60;/&#62; Code</a>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="project-card reveal" data-type="personal">
+        <div class="project-thumb" style="background:linear-gradient(135deg,#0a1628,#0f2a50)">
+          <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><rect x="60" y="60" width="80" height="30" rx="4" fill="#38bdf822"/><rect x="160" y="85" width="80" height="30" rx="4" fill="#38bdf833"/><rect x="260" y="60" width="80" height="30" rx="4" fill="#38bdf822"/><line x1="100" y1="75" x2="160" y2="100" stroke="#38bdf8" stroke-width="0.5" opacity="0.6"/><line x1="240" y1="100" x2="260" y2="75" stroke="#38bdf8" stroke-width="0.5" opacity="0.6"/></svg>
+          <div class="thumb-icon">&#9889;</div>
+          <div class="project-badges"><span class="badge badge-personal">Personal</span></div>
+        </div>
+        <div class="project-body">
+          <div class="project-title">FastAPI Microservice</div>
+          <div class="project-desc">High-performance REST API built with FastAPI and async Python. Features JWT auth, rate limiting, Redis caching, and automatic OpenAPI documentation.</div>
+          <div class="project-stack"><span class="stack-tag">FastAPI</span><span class="stack-tag">PostgreSQL</span><span class="stack-tag">Redis</span><span class="stack-tag">JWT</span><span class="stack-tag">Docker</span></div>
+          <div class="project-links">
+            <span class="proj-btn proj-btn-disabled">&#128274; Not Hosted</span>
+            <a href="https://github.com/alansha" target="_blank" class="proj-btn proj-btn-secondary">&#60;/&#62; Code</a>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="project-card reveal" data-type="team live">
+        <div class="project-thumb" style="background:linear-gradient(135deg,#0a1f0a,#0f3d1a)">
+          <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><circle cx="120" cy="100" r="30" fill="#39d98822"/><circle cx="200" cy="70" r="25" fill="#39d98833"/><circle cx="280" cy="100" r="30" fill="#39d98822"/><line x1="150" y1="100" x2="175" y2="70" stroke="#39d98a" stroke-width="0.5" opacity="0.6"/><line x1="225" y1="70" x2="250" y2="100" stroke="#39d98a" stroke-width="0.5" opacity="0.6"/></svg>
+          <div class="thumb-icon">&#127970;</div>
+          <div class="project-badges"><span class="badge badge-live">&#9679; Live</span><span class="badge badge-team">Team</span><span class="badge badge-org">Org</span></div>
+        </div>
+        <div class="project-body">
+          <div class="project-title">Enterprise CRM System</div>
+          <div class="project-desc">Collaborated with a team to build a CRM system for an organisation. Handled backend API development, database design, and deployment pipelines.</div>
+          <div class="project-stack"><span class="stack-tag">Django</span><span class="stack-tag">MySQL</span><span class="stack-tag">AWS</span><span class="stack-tag">REST API</span><span class="stack-tag">Git</span></div>
+          <div class="project-links">
+            <a href="#" class="proj-btn proj-btn-primary">&#127760; Live</a>
+            <span class="proj-btn proj-btn-disabled">&#128274; Private Repo</span>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="project-card reveal" data-type="personal">
+        <div class="project-thumb" style="background:linear-gradient(135deg,#1a100a,#3d1f0f)">
+          <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><polygon points="200,40 340,160 60,160" fill="none" stroke="#f59e0b" stroke-width="0.5" opacity="0.4"/><polygon points="200,70 300,150 100,150" fill="#f59e0b22"/></svg>
+          <div class="thumb-icon">&#128293;</div>
+          <div class="project-badges"><span class="badge badge-personal">Personal</span><span class="badge badge-wip">WIP</span></div>
+        </div>
+        <div class="project-body">
+          <div class="project-title">Flask E-Commerce API</div>
+          <div class="project-desc">A lightweight e-commerce backend built with Flask. Features product catalog, cart management, order processing, and payment gateway integration.</div>
+          <div class="project-stack"><span class="stack-tag">Flask</span><span class="stack-tag">SQLAlchemy</span><span class="stack-tag">MySQL</span><span class="stack-tag">Stripe</span></div>
+          <div class="project-links">
+            <span class="proj-btn proj-btn-disabled">&#128679; In Progress</span>
+            <a href="https://github.com/alansha" target="_blank" class="proj-btn proj-btn-secondary">&#60;/&#62; Code</a>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="project-card reveal" data-type="team">
+        <div class="project-thumb" style="background:linear-gradient(135deg,#0a0f1a,#1a2040)">
+          <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><rect x="50" y="80" width="300" height="40" rx="4" fill="#a897f522"/><rect x="80" y="60" width="60" height="80" rx="4" fill="#a897f533"/><rect x="260" y="60" width="60" height="80" rx="4" fill="#a897f533"/></svg>
+          <div class="thumb-icon">&#128202;</div>
+          <div class="project-badges"><span class="badge badge-team">Team</span><span class="badge badge-org">Org</span></div>
+        </div>
+        <div class="project-body">
+          <div class="project-title">Analytics Dashboard</div>
+          <div class="project-desc">Team project building a real-time analytics dashboard. Responsible for backend data pipeline, API endpoints, and AWS infrastructure setup.</div>
+          <div class="project-stack"><span class="stack-tag">Django</span><span class="stack-tag">Celery</span><span class="stack-tag">Redis</span><span class="stack-tag">AWS S3</span><span class="stack-tag">MySQL</span></div>
+          <div class="project-links">
+            <span class="proj-btn proj-btn-disabled">&#128274; Not Hosted</span>
+            <span class="proj-btn proj-btn-disabled">&#128274; Private Repo</span>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="project-card reveal" data-type="personal live">
+        <div class="project-thumb" style="background:linear-gradient(135deg,#10081a,#2a1545)">
+          <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="50" fill="none" stroke="#a897f5" stroke-width="0.5" opacity="0.5"/><circle cx="300" cy="100" r="50" fill="none" stroke="#a897f5" stroke-width="0.5" opacity="0.5"/><circle cx="200" cy="100" r="50" fill="#a897f522"/></svg>
+          <div class="thumb-icon">&#128272;</div>
+          <div class="project-badges"><span class="badge badge-live">&#9679; Live</span><span class="badge badge-personal">Personal</span></div>
+        </div>
+        <div class="project-body">
+          <div class="project-title">Django Auth Service</div>
+          <div class="project-desc">Production-grade authentication microservice with Django. Features OAuth2, JWT tokens, email verification, 2FA, and session management deployed on AWS.</div>
+          <div class="project-stack"><span class="stack-tag">Django</span><span class="stack-tag">JWT</span><span class="stack-tag">OAuth2</span><span class="stack-tag">AWS EC2</span><span class="stack-tag">MySQL</span></div>
+          <div class="project-links">
+            <a href="#" class="proj-btn proj-btn-primary">&#127760; Live</a>
+            <a href="https://github.com/alansha" target="_blank" class="proj-btn proj-btn-secondary">&#60;/&#62; Code</a>
+          </div>
+        </div>
+      </div>
+ 
+    </div>
+  </div>
+</section>
+ 
+<div class="section-divider"></div>
+ 
+<!-- EDUCATION & CERTIFICATIONS -->
+<section id="education">
+  <div class="section-inner">
+    <div class="section-label reveal">// credentials</div>
+    <h2 class="section-title reveal">Education &amp; <span>Certifications</span></h2>
+    <p class="section-sub reveal">My academic background and professional certifications that validate my skills.</p>
+    <div class="edu-cert-grid">
+      <div class="reveal">
+        <div class="edu-block-title">&#127891; Education</div>
+        <div class="edu-card">
+          <div class="edu-degree">Bachelor of Computer Applications</div>
+          <div class="edu-school">Your College Name &middot; Kerala, India</div>
+          <div class="edu-year">&#128197; 2021 &mdash; 2024</div>
+          <div class="edu-desc">Studied core computer science subjects including data structures, algorithms, database management, web technologies, and software engineering. Built strong foundations in Python and backend development.</div>
+        </div>
+        <div class="edu-block-title" style="margin-top:32px">&#127942; Highlights</div>
+        <div class="edu-card">
+          <div class="edu-degree">AWS Cloud Deployment</div>
+          <div class="edu-school">Self-Learning &middot; Hands-on Project</div>
+          <div class="edu-year">&#128197; 2025</div>
+          <div class="edu-desc">Successfully deployed a production Django application on AWS using EC2, S3, CodeDeploy, Gunicorn, and Nginx — proving real cloud engineering skills beyond academics.</div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-degree">Full-Stack Gaming Platform</div>
+          <div class="edu-school">Personal Build &middot; DAVIGAME</div>
+          <div class="edu-year">&#128197; 2025</div>
+          <div class="edu-desc">Built an end-to-end platform with token economy, Stripe payments, and CI/CD pipeline independently — demonstrating self-driven engineering ability.</div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="edu-block-title">&#128220; Certifications</div>
+        <div class="cert-card">
+          <div class="cert-icon ci-aws">&#9925;</div>
+          <div>
+            <div class="cert-name">AWS Cloud Practitioner</div>
+            <div class="cert-issuer">Amazon Web Services (AWS)</div>
+            <div class="cert-badges">
+              <span class="cert-badge cb-year">&#128197; 2024</span>
+              <a href="#" class="cert-badge cb-verify">&#10003; Verify</a>
             </div>
-        </div><!-- end of container -->
-    </section> <!-- end of portfolio section -->
-
-    <!-- HireMe section -->
-    <section class="section-sm bg-primary" id="HireMe">
-        <!-- container -->
-        <div class="container text-center text-sm-left">
-            <!-- row -->
-            <div class="row align-items-center">
-                <div class="col-sm offset-md-1 mb-4 mb-md-0">
-                    <h6 class="title text-light">Want to work with me?</h6>
-                    <p class="m-0 text-light">Always feel Free to Contact & Hire me</p>
-                </div>
-                <div class="col-sm offset-sm-2 offset-md-3">
-                    <button class="btn btn-lg my-font btn-light rounded" id="email-btn">Hire Me</button>
-                </div>
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </section> <!-- end of section -->
-
-    <!-- contact section -->
-    <section class="section" id="contact">
-        <div class="container text-center">
-            <p class="section-subtitle">How can you communicate?</p>
-            <h6 class="section-title mb-5">Contact Me</h6>
-            <!-- contact form -->
-            <form id="contact-form" class="contact-form col-md-10 col-lg-8 m-auto">
-                <div class="form-row">
-                    <div class="form-group col-sm-6">
-                        <input type="text" name="user_name" size="50" class="form-control" placeholder="Your Name" required>                 
-                    </div>
-                    <div class="form-group col-sm-6">
-                        <input type="email" name="user_email" class="form-control" placeholder="Enter Email" required>                 
-                    </div>
-                    <div class="form-group col-sm-12">
-                        <textarea name="comment" id="comment" rows="6" class="form-control" placeholder="Write Something"></textarea>
-                    </div>
-                    <div class="form-group col-sm-12 mt-3">
-                        <input type="submit" value="Send Message" class="btn btn-outline-primary rounded">                  
-                    </div>
-                </div>  
-            </form><!-- end of contact form -->
-        </div><!-- end of container -->
-    </section><!-- end of contact section -->
-
-    <!-- footer -->
-    <div class="container">
-        <footer class="footer">       
-            <p class="mb-0">Copyright <script>document.write(new Date().getFullYear())</script> &copy; Alansha M</p>
-            <div class="social-links text-right m-auto ml-sm-auto">
-                <a href="https://github.com/alnxha7" class="link"><i class="ti-github"></i></a>
-                <a href="https://www.linkedin.com/in/alansha-m/" class="link"><i class="ti-linkedin"></i></a>
-                <a href="mailto:alansha71011@gmail.com" class="link"><i class="ti-email"></i></a>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-icon ci-py">&#128013;</div>
+          <div>
+            <div class="cert-name">Python for Everybody</div>
+            <div class="cert-issuer">Coursera &middot; University of Michigan</div>
+            <div class="cert-badges">
+              <span class="cert-badge cb-year">&#128197; 2023</span>
+              <a href="#" class="cert-badge cb-verify">&#10003; Verify</a>
             </div>
-        </footer>
-    </div> <!-- end of page footer -->
-    
-    <!-- core  -->
-    <script src="public_html/assets/vendors/jquery/jquery-3.4.1.js"></script>
-    <script src="public_html/assets/vendors/bootstrap/bootstrap.bundle.js"></script>
-
-    <!-- bootstrap 3 affix -->
-    <script src="public_html/assets/vendors/bootstrap/bootstrap.affix.js"></script>
-
-    <!-- Meyawo js -->
-    <script src="public_html/assets/js/meyawo.js"></script>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-icon ci-dj">&#127807;</div>
+          <div>
+            <div class="cert-name">Django Web Framework</div>
+            <div class="cert-issuer">Meta &middot; Coursera</div>
+            <div class="cert-badges">
+              <span class="cert-badge cb-year">&#128197; 2023</span>
+              <a href="#" class="cert-badge cb-verify">&#10003; Verify</a>
+            </div>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-icon ci-gen">&#128272;</div>
+          <div>
+            <div class="cert-name">Your 4th Certificate Here</div>
+            <div class="cert-issuer">Issuing Organization</div>
+            <div class="cert-badges">
+              <span class="cert-badge cb-year">&#128197; 2024</span>
+              <a href="#" class="cert-badge cb-verify">&#10003; Verify</a>
+            </div>
+          </div>
+        </div>
+        <div class="edu-block-title" style="margin-top:32px">&#9889; Proficiency</div>
+        <div class="sbar-label"><span>Python / Django</span><span style="color:var(--purple2)">90%</span></div>
+        <div class="sbar-track"><div class="sbar-fill" style="width:90%;background:linear-gradient(90deg,var(--purple),var(--purple2))"></div></div>
+        <div class="sbar-label"><span>FastAPI / Flask</span><span style="color:var(--cyan)">80%</span></div>
+        <div class="sbar-track"><div class="sbar-fill" style="width:80%;background:linear-gradient(90deg,var(--cyan),#7dd3fc)"></div></div>
+        <div class="sbar-label"><span>AWS / DevOps</span><span style="color:var(--amber)">75%</span></div>
+        <div class="sbar-track"><div class="sbar-fill" style="width:75%;background:linear-gradient(90deg,var(--amber),#fcd34d)"></div></div>
+        <div class="sbar-label"><span>MySQL / Databases</span><span style="color:var(--green)">85%</span></div>
+        <div class="sbar-track"><div class="sbar-fill" style="width:85%;background:linear-gradient(90deg,var(--green),#6ee7b7)"></div></div>
+        <div class="sbar-label"><span>REST API Design</span><span style="color:var(--purple2)">88%</span></div>
+        <div class="sbar-track"><div class="sbar-fill" style="width:88%;background:linear-gradient(90deg,var(--purple),var(--purple2))"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<div class="section-divider"></div>
+ 
+<!-- GITHUB -->
+<section id="github">
+  <div class="section-inner">
+    <div class="section-label reveal">// open source</div>
+    <h2 class="section-title reveal">GitHub <span>Activity</span></h2>
+    <div class="github-grid">
+      <div class="reveal">
+        <div class="github-card">
+          <div class="github-avatar">&#128104;&#8205;&#128187;</div>
+          <div class="github-username">alansha-m</div>
+          <div class="github-bio">Backend Developer &middot; Python &middot; AWS &middot; Open Source</div>
+          <div class="github-stats">
+            <div class="gh-stat"><div class="gh-stat-num">20+</div><div class="gh-stat-label">Repos</div></div>
+            <div class="gh-stat"><div class="gh-stat-num">500+</div><div class="gh-stat-label">Commits</div></div>
+            <div class="gh-stat"><div class="gh-stat-num">50+</div><div class="gh-stat-label">Stars</div></div>
+          </div>
+          <div class="contrib-graph">
+            <div class="contrib-title">Contribution activity</div>
+            <div class="contrib-grid" id="contribGrid"></div>
+          </div>
+          <a href="https://github.com/alansha" target="_blank" class="btn-primary" style="width:100%;justify-content:center">View GitHub Profile &#8594;</a>
+        </div>
+      </div>
+      <div class="github-right reveal">
+        <a href="https://github.com/alansha/davigame" target="_blank" class="repo-card">
+          <div class="repo-name">&#128230; davigame-platform</div>
+          <div class="repo-desc">Full-stack gaming platform with token economy, Stripe payments, and AWS deployment pipeline.</div>
+          <div class="repo-meta"><span><span class="lang-dot" style="background:#3572A5"></span>Python</span><span>&#11088; 12</span><span>&#128256; 3</span></div>
+        </a>
+        <a href="https://github.com/alansha/fastapi-service" target="_blank" class="repo-card">
+          <div class="repo-name">&#128230; fastapi-microservice</div>
+          <div class="repo-desc">Production-ready FastAPI microservice with JWT auth, Redis caching, and Docker support.</div>
+          <div class="repo-meta"><span><span class="lang-dot" style="background:#3572A5"></span>Python</span><span>&#11088; 8</span><span>&#128256; 2</span></div>
+        </a>
+        <a href="https://github.com/alansha/flask-ecommerce" target="_blank" class="repo-card">
+          <div class="repo-name">&#128230; flask-ecommerce-api</div>
+          <div class="repo-desc">Lightweight e-commerce REST API built with Flask and SQLAlchemy with full Stripe integration.</div>
+          <div class="repo-meta"><span><span class="lang-dot" style="background:#3572A5"></span>Python</span><span>&#11088; 6</span><span>&#128256; 1</span></div>
+        </a>
+        <a href="https://github.com/alansha/django-auth" target="_blank" class="repo-card">
+          <div class="repo-name">&#128230; django-auth-service</div>
+          <div class="repo-desc">Django authentication microservice with OAuth2, JWT, 2FA, and email verification system.</div>
+          <div class="repo-meta"><span><span class="lang-dot" style="background:#3572A5"></span>Python</span><span>&#11088; 15</span><span>&#128256; 4</span></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<div class="section-divider"></div>
+ 
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-label reveal">// get in touch</div>
+    <h2 class="section-title reveal">Let's Build Something <span>Together</span></h2>
+    <p class="section-sub reveal">Whether you have a project in mind, a job opportunity, or just want to say hello — my inbox is always open.</p>
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <div class="contact-item">
+          <div class="contact-icon">&#128231;</div>
+          <div><div class="contact-item-title">EMAIL</div><div class="contact-item-val"><a href="mailto:alansha71011@email.com">alansha71011@email.com</a></div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">&#128205;</div>
+          <div><div class="contact-item-title">LOCATION</div><div class="contact-item-val">Kollam, Kerala, India</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">&#128188;</div>
+          <div><div class="contact-item-title">LINKEDIN</div><div class="contact-item-val"><a href="https://linkedin.com/in/alansha-m" target="_blank">linkedin.com/in/alansha-m</a></div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">GH</div>
+          <div><div class="contact-item-title">GITHUB</div><div class="contact-item-val"><a href="https://github.com/alansha" target="_blank">github.com/alansha</a></div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">&#128994;</div>
+          <div><div class="contact-item-title">STATUS</div><div class="contact-item-val" style="color:var(--green)">Open to opportunities</div></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="contact-form">
+          <div class="form-success" id="formSuccess">&#9989; Message sent! I'll get back to you within 24 hours.</div>
+          <div id="contactFormEl">
+            <div class="form-row">
+              <div class="form-group">
+                <label>YOUR NAME *</label>
+                <input type="text" id="fname" placeholder="John Doe"/>
+              </div>
+              <div class="form-group">
+                <label>YOUR EMAIL *</label>
+                <input type="email" id="femail" placeholder="john@example.com"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>SUBJECT</label>
+              <select id="fsubject">
+                <option value="">Select a topic...</option>
+                <option>Job Opportunity</option>
+                <option>Freelance Project</option>
+                <option>Collaboration</option>
+                <option>Technical Discussion</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>YOUR MESSAGE *</label>
+              <textarea id="fmessage" placeholder="Tell me about your project, idea, or opportunity..."></textarea>
+            </div>
+            <button class="form-submit" onclick="sendMessage()">&#128640; Send Message</button>
+            <p class="form-note">Powered by Formspree &middot; Usually responds within 24h</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">AM<span>.</span></div>
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a href="#github">GitHub</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="social-row">
+      <a href="https://github.com/alansha" target="_blank" class="social-btn">GH</a>
+      <a href="https://linkedin.com/in/alansha-m" target="_blank" class="social-btn">in</a>
+      <a href="mailto:alansha71011@email.com" class="social-btn">@</a>
+    </div>
+    <div class="footer-copy">&#169; 2025 Alansha M &middot; Built with &#10084; and lots of &#9749;</div>
+  </div>
+</footer>
+ 
+<script>
+var cursor = document.getElementById('cursor');
+var ring = document.getElementById('cursorRing');
+document.addEventListener('mousemove', function(e) {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+  ring.style.left = e.clientX + 'px';
+  ring.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('a,button,.project-card,.repo-card,.cert-card,.exp-card').forEach(function(el) {
+  el.addEventListener('mouseenter', function() { ring.classList.add('hovered'); });
+  el.addEventListener('mouseleave', function() { ring.classList.remove('hovered'); });
+});
+window.addEventListener('scroll', function() {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+});
+document.getElementById('hamburger').addEventListener('click', function() {
+  document.getElementById('mobileMenu').classList.add('open');
+});
+document.getElementById('mobileClose').addEventListener('click', closeMobile);
+function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); }
+var roles = ['Backend Developer','Django Expert','AWS Engineer','FastAPI Builder','Python Developer','DevOps Enthusiast'];
+var ri = 0, ci = 0, deleting = false;
+function typewrite() {
+  var el = document.getElementById('typewriter');
+  var current = roles[ri];
+  if (!deleting && ci <= current.length) { el.textContent = current.slice(0, ci++); setTimeout(typewrite, ci > current.length ? 1800 : 80); }
+  else if (deleting && ci >= 0) { el.textContent = current.slice(0, ci--); setTimeout(typewrite, 40); }
+  else if (!deleting && ci > current.length) { deleting = true; setTimeout(typewrite, 200); }
+  else { deleting = false; ri = (ri + 1) % roles.length; setTimeout(typewrite, 300); }
+}
+typewrite();
+var cg = document.getElementById('contribGrid');
+var lvls = ['','l1','l2','l3','l4'];
+for (var i = 0; i < 156; i++) {
+  var c = document.createElement('div');
+  var r = Math.random();
+  c.className = 'contrib-cell ' + (r < 0.5 ? '' : r < 0.7 ? lvls[1] : r < 0.85 ? lvls[2] : r < 0.95 ? lvls[3] : lvls[4]);
+  cg.appendChild(c);
+}
+var obs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+function filterProjects(btn, type) {
+  document.querySelectorAll('.filter-tab').forEach(function(t) { t.classList.remove('active'); });
+  btn.classList.add('active');
+  document.querySelectorAll('.project-card').forEach(function(card) {
+    var types = card.dataset.type || '';
+    card.classList.toggle('hidden', type !== 'all' && !types.includes(type));
+  });
+}
+function sendMessage() {
+  var name = document.getElementById('fname').value.trim();
+  var email = document.getElementById('femail').value.trim();
+  var message = document.getElementById('fmessage').value.trim();
+  if (!name || !email || !message) { alert('Please fill in your name, email, and message.'); return; }
+  var FORMSPREE_ID = 'https://formspree.io/f/mgopnell';
+  if (FORMSPREE_ID === 'https://formspree.io/f/mgopnell') {
+    document.getElementById('contactFormEl').style.display = 'none';
+    document.getElementById('formSuccess').classList.add('show');
+    return;
+  }
+  fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: name, email: email, subject: document.getElementById('fsubject').value, message: message })
+  }).then(function(r) {
+    if (r.ok) { document.getElementById('contactFormEl').style.display = 'none'; document.getElementById('formSuccess').classList.add('show'); }
+    else { alert('Something went wrong. Please email me directly.'); }
+  }).catch(function() { alert('Network error. Please email me directly.'); });
+}
+</script>
 </body>
 </html>
